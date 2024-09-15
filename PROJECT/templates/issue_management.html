@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Book Management</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" class="navbar bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+          <div class="navbar-brand" style="color: white; margin-left: 10px;">Librarian Workspace</div>    
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/librarian/dashboard">Dashboard</a>
+              </li> 
+              <li class="nav-item" style="position: absolute;right:100px;">
+                <a class="nav-link active" aria-current="page" href="/statistics">Statistics</a>
+              </li>                         
+              <li class="nav-item" style="position: absolute;right:10px;">
+                <a class="nav-link active" aria-current="page" href="/librarian/logout">LOGOUT</a>
+              </li>
+            </ul>           
+          </div>
+        </div>
+    </nav> 
+    {% if issued_books %}
+        <h4 style="color:blue">Issued Books:</h4>  
+        {% for x in issued_books %}      
+        <div class="row" style="margin-left: 100px; margin-bottom: 50px;">        
+            <div class="col-2">
+                <h3 style="color: brown;">{{x[0].Name}}</h3>
+            </div>
+            <div class="col-3">                                
+                <h5>Authors:</h5>
+                {% for y in x[0].author %}
+                <h6>{{y.Name}}</h6>
+                {% endfor %}                
+                {% if x[0].Pages %}
+                <h5>Pages:</h5>
+                {{x[0].Pages}}
+                {% endif %}
+            </div>
+            <div class="col-3">
+                <h5>User:</h5>
+                {{x[1].user_name}}<br>
+                <i>Email address: </i>
+                {{x[1].Email}}<br>
+                <i>Wallet Balance:</i>
+                {{x[1].Wallet}}
+            </div>
+            <div class="col-2">
+                <a href="/book/{{x[1].ID}}/access/revoke/{{x[0].ID}}" class="btn btn-primary" >Revoke Access</a>
+            </div>
+        </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if pending_books %}
+        <h4 style="color:blue">Pending Requests:</h4>
+        {% for x in pending_books %}    
+        <div class="row" style="margin-left: 100px;margin-bottom: 50px;">
+            <div class="col-2">
+                <h3 style="color: brown;">{{x[0].Name}}</h3>  
+            </div>
+            <div class="col-3">                              
+                <h5>Authors:</h5>
+                {% for y in x[0].author %}
+                <h6>{{y.Name}}</h6>
+                {% endfor %}                
+                {% if x[0].Pages %}
+                <h5>Pages:</h5>
+                {{x[0].Pages}}
+                {% endif %}
+            </div>
+            <div class="col-3">
+                <h5>Users:</h5>
+                {{x[1].user_name}}<br>
+                <i>Email address: </i>
+                {{x[1].Email}}<br>
+                <i>Wallet Balance:</i>
+                {{x[1].Wallet}}
+            </div>
+            <div class="col-2">
+                <a href="/book/{{x[1].ID}}/access/grant/{{x[0].ID}}" class="btn btn-primary" >Grant Access</a>
+            </div>
+            <div class="col-2">
+                <a href="/book/{{x[1].ID}}/access/deny/{{x[0].ID}}" class="btn btn-primary" >Deny Request</a>
+            </div>
+        </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if nonissued_books %}
+        <h4 style="color: blue">Non-Issued Books:</h4>
+        {% for x in nonissued_books %}    
+        <div class="row" style="margin-left: 100px;margin-bottom: 50px;">
+            <div class="col-2">
+                <h3 style="color: brown;">{{x.Name}}</h3>   
+            </div>
+            <div class="col-3">                             
+                <h5>Authors:</h5>
+                {% for y in x.author %}
+                <h6>{{y.Name}}</h6>
+                {% endfor %}
+                {% if x.Pages %}
+                <h5>Pages:</h5>
+                {{x.Pages}}
+                {% endif %}
+            </div>         
+        </div>    
+        {% endfor %}
+    {% endif %}
+</body>
+</body>
+</html>

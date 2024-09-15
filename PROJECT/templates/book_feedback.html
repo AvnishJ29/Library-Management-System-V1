@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    
+    <title>Feedback</title>    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>  
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" class="navbar bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+          <div class="navbar-brand" style="color: white;"><span style="color: red;">R</span>ead-a-Thon Books</div>    
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/user/dashboard">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/book/issued/{{user.ID}}">My Books</a>
+              </li> 
+              <li>
+                <div class="navbar-brand" style="margin-left: 300px;" >
+                  {{book.Name}}
+                </div>
+              </li>  
+              <li class="nav-item" style="position: absolute;right:10px;">
+                <a class="nav-link active" aria-current="page" href="/user/logout">LOGOUT</a>
+              </li>
+            </ul>           
+          </div>
+        </div>
+    </nav>       
+     <h4 style="color: brown;text-align: center;"> {{user.user_name}} your Feedback is valuable to us !!</h4>
+     <form action="/book/{{book.ID}}/feedback/{{user.ID}}"  method="POST" style="margin-top: 40px;">
+        <div class="row">
+            <div class="col-3" style="margin-left: 10px;">Content Quality</div>
+            <div class="col-2">               
+                <label><input type="radio" name="content_rating" value="1" required> Poor</label>
+            </div>
+            <div class="col-2">
+                <label><input type="radio" name="content_rating" value="2"> Average</label>
+            </div>
+            <div class="col-2">
+                <label><input type="radio" name="content_rating" value="3"> Good</label>
+            </div>
+            <div class="col-2">
+                <label><input type="radio" name="content_rating" value="4"> Excellent</label>                
+            </div>
+        </div><p>
+        <div class="row">
+            <div class="col-3" style="margin-left: 10px;">Writing Style</div>
+            <div class="col-2">               
+                <label><input type="radio" name="writing_style_rating" value="1" required> Poor</label>
+            </div>
+            <div class="col-2">
+                <label><input type="radio" name="writing_style_rating" value="2"> Average</label>
+            </div>
+            <div class="col-2">
+                <label><input type="radio" name="writing_style_rating" value="3"> Good</label>
+            </div>
+            <div class="col-2">
+                <label><input type="radio" name="writing_style_rating" value="4"> Excellent</label>                
+            </div>
+        </div><p>
+        <div class="row">
+            <div class="col-3" style="margin-left: 10px;">Recommendation to Others</div>
+            <div class="col-2">               
+                <label><input type="radio" name="recomm_rating" value="1" required > Strongly Not Recommended</label>
+            </div>
+            <div class="col-2">
+                <label><input type="radio" name="recomm_rating" value="2"> Not Recommended</label>
+            </div>
+            <div class="col-2">
+                <label><input type="radio" name="recomm_rating" value="3"> Recommended</label>
+            </div>
+            <div class="col-2">
+                <label><input type="radio" name="recomm_rating" value="4"> Highly Recommended</label>                
+            </div>
+        </div><p>
+        <div class="row">
+            <div class="col-3" style="margin-left: 10px;">Overall Rating</div>
+            <div class="col-2">               
+                <label><input type="radio" name="overall_rating" value="1" required> Poor</label>
+            </div>
+            <div class="col-2">
+                <label><input type="radio" name="overall_rating" value="2"> Average</label>
+            </div>
+            <div class="col-2">
+                <label><input type="radio" name="overall_rating" value="3"> Good</label>
+            </div>
+            <div class="col-2">
+                <label><input type="radio" name="overall_rating" value="4"> Excellent</label>                
+            </div>
+        </div>
+        <div style="margin-top: 20px;" class="row">
+            <input class="form-control" type="text" name="comment" placeholder="Any comments...">
+        </div>
+        <div style="margin-top: 20px;">
+            <input style="margin-left: 700px;" class="btn btn-outline-success" type="submit" value = "Submit"> 
+        </div>   
+    </form>
+</body>
+</html>
